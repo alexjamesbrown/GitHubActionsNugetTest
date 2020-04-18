@@ -35,7 +35,12 @@ jobs:
       run: dotnet test --no-build --configuration Release
 
   pack:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
+    steps:
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.0
+      with:
+        vs-version: 16.5
     needs: build
     if: github.event_name == 'push'
     steps:
@@ -46,7 +51,7 @@ jobs:
     - name: Setup .NET Core 3.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.0.101
+        dotnet-version: 2.1.607
 
     - name: Determine version
       run: echo "::set-env name=VERSION::$(git describe --tags --dirty)"
