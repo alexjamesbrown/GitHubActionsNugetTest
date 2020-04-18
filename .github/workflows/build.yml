@@ -35,20 +35,20 @@ jobs:
       run: dotnet test --no-build --configuration Release
 
   pack:
+    needs: build
+    if: github.event_name == 'push'
+
     runs-on: windows-latest
     steps:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.0
       with:
         vs-version: 16.5
-    needs: build
-    if: github.event_name == 'push'
-    steps:
 
     - name: Checkout
       uses: actions/checkout@v1
 
-    - name: Setup .NET Core 3.0
+    - name: Setup .NET Core 2.1
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.1.607
