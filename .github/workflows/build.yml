@@ -29,13 +29,12 @@ jobs:
         dotnet build --configuration Release --no-restore
         dotnet test --no-build --configuration Release
 
-    - name: Make package dir 
-      run: mkdir ${{ github.workspace }}/package
-
     - name: Pack
-      run: dotnet pack --no-build -c Release --output "${{ github.workspace }}/package"
+      run: | 
+        mkdir ${{ github.workspace }}/package
+        dotnet pack --no-build -c Release --output "${{ github.workspace }}/package"
 
-    - name: Upload artifact
+    - name: Upload Artifact
       uses: actions/upload-artifact@v1.0.0
       with: 
         name: NuGet
