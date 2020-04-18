@@ -1,14 +1,15 @@
-﻿using System;
-using Nunit.Framework;
+﻿using NUnit.Framework;
 
 namespace GitHubActionsNugetTest.UnitTest
 {
+    [TestFixture]
     public class Tests
     {
+        [Test]
         public void Test1()
         {
             //wow great test
-            Assert.AreEqual(1, 1);
+            Assert.Pass();
         }
     }
 }
